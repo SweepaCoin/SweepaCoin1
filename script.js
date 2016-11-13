@@ -113,7 +113,7 @@ function correctCaptcha(a) {
 }
 
 function startNewGame() {
-    if (!connected) return $("#theDimmer").html('Error: Not connected!<br><a href="https://www.moneypot.com/oauth/authorize?app_id=2392&response_type=token&state=Meh&redirect_uri=https://sweepacoin.github.io/">Click here to login</a>'), void $("#game_left").dimmer("show");
+    if (!connected) return $("#theDimmer").html('Error: Not connected!<br><a href="https://www.moneypot.com/oauth/authorize?app_id=2392&response_type=token&state=Meh&redirect_uri=http://bitsweep.ga/">Click here to login</a>'), void $("#game_left").dimmer("show");
     if ($(".settingsButon").css("display", "none"), game.bombs < 1 || game.bombs > 24) return $("#theDimmer").html("Error: Bombs amount!<br>(min 1 & max 24)"), $("#game_left").dimmer("show"), void $(".settingsButon").css("display", "inline-block");
     if (game.tilesClicked = 0, houseEdge = .01, odds = (25 - game.bombs - game.tilesClicked) / (25 - game.tilesClicked), next = game.bet * ((1 - houseEdge) / odds) - game.bet, game = {
             status: "IN_PROGRESS",
@@ -242,7 +242,7 @@ function startNewGame() {
                             }, $("#next_value").text(parseFloat(game.next).formatMoney(2, ".", ",")), $("#stake_value").text(parseFloat(game.stake).formatMoney(2, ".", ",")), $(".log_item").each(function(a) {
                                 a > 5 && $(this).remove()
                             }), console.log(game);
-                        else console.log("BET ERROR: " + JSON.stringify(b.responseJSON)), $("#theDimmer").html("BET ERROR: " + JSON.stringify(b.responseJSON) + '<br><a href="https://www.moneypot.com/oauth/authorize?app_id=2392&response_type=token&state=Meh&redirect_uri=https://sweepacoin.github.io/">Click here to reconnect</a>'), $("#game_left").dimmer("show"), $(".settingsButon").css("display", "inline-block")
+                        else console.log("BET ERROR: " + JSON.stringify(b.responseJSON)), $("#theDimmer").html("BET ERROR: " + JSON.stringify(b.responseJSON) + '<br><a href="https://www.moneypot.com/oauth/authorize?app_id=2392&response_type=token&state=Meh&redirect_uri=http://bitsweep.ga/">Click here to reconnect</a>'), $("#game_left").dimmer("show"), $(".settingsButon").css("display", "inline-block")
                     })
                 }
             }
@@ -333,7 +333,7 @@ $("#bet").val(game.bet), $("#bombsButtons .button").each(function(a) {
         class: "ui text loader",
         text: "Connecting"
     }).appendTo(c);
-    "undefined" != typeof $.session.get("session_access_token") && (access_token = $.session.get("session_access_token")), "" != getURLParameter("access_token") && null != getURLParameter("access_token") && (access_token = getURLParameter("access_token"), "undefined" != typeof $.session.get("session_access_token") && $.session.remove("session_access_token"), $.session.set("session_access_token", access_token), window.history.pushState("", "Sweepabit", "/")), socket = io.connect("https://socket.moneypot.com");
+    "undefined" != typeof $.session.get("session_access_token") && (access_token = $.session.get("session_access_token")), "" != getURLParameter("access_token") && null != getURLParameter("access_token") && (access_token = getURLParameter("access_token"), "undefined" != typeof $.session.get("session_access_token") && $.session.remove("session_access_token"), $.session.set("session_access_token", access_token), window.history.pushState("", "Bitsweep", "/")), socket = io.connect("https://socket.moneypot.com");
     var e = {
         app_id: 2392,
         access_token: "" != access_token && null != access_token ? access_token : void 0,
@@ -363,7 +363,7 @@ $("#bet").val(game.bet), $("#bombsButtons .button").each(function(a) {
                 sendMessage(String(document.getElementById("chatText").value))
             }), $.getJSON("https://api.moneypot.com/v1/token?access_token=" + access_token, function(a) {
                 $("#connectionText").css("display", "block"), $("#betPanel").css("display", "block"), $("#depositButton").css("display", "inline-block"), $("#withdrawButton").css("display", "inline-block"), $("#username").text(a.auth.user.uname), $("#balance").text((a.auth.user.balance / 100).formatMoney(2, ".", ",")), user_balance = a.auth.user.balance / 100, connected = !0, $("#highRoller_log").css("display", "block"), $("#highRoller_logs").html('<div class="ui active loader"></div>'), $.post("https://api.moneypot.com/v1/hashes?access_token=" + access_token, "", function(a) {
-                    if (console.log("[Provably fair] We received our hash: " + a.hash), Hash = "undefined" != typeof a.hash && a.hash, $("#loaderContainer").css("display", "none"), "" == Hash || 0 == Hash) return $("#theDimmer").html('Error: Moneypot did not give a correct hash!<br><a href="https://www.moneypot.com/oauth/authorize?app_id=2392&response_type=token&state=Meh&redirect_uri=https://sweepacoin.github.io/">Click here to reconnect</a><br>Error: ' + JSON.stringify(a).replace(access_token, "[censored]")), $("#game_left").dimmer("show"), void $(".settingsButon").css("display", "inline-block")
+                    if (console.log("[Provably fair] We received our hash: " + a.hash), Hash = "undefined" != typeof a.hash && a.hash, $("#loaderContainer").css("display", "none"), "" == Hash || 0 == Hash) return $("#theDimmer").html('Error: Moneypot did not give a correct hash!<br><a href="https://www.moneypot.com/oauth/authorize?app_id=2392&response_type=token&state=Meh&redirect_uri=http://bitsweep.ga/">Click here to reconnect</a><br>Error: ' + JSON.stringify(a).replace(access_token, "[censored]")), $("#game_left").dimmer("show"), void $(".settingsButon").css("display", "inline-block")
                 }, "json"), $(".chatMessage").each(function(a) {
                     $(this).html().split(":")[1];
                     $(this).html($(this).html().replace("@" + $("#username").text(), "<span class='notify'>@" + $("#username").text() + "</span>"))
